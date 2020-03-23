@@ -14,13 +14,14 @@ inp[2] = 2
 
 BEGIN = 0
 STEP = 4
+HALT = 99
 
 OPCODE = {
     1: get_sum,
     2: get_mul
 }
 
-while inp[BEGIN] != 99:
+while inp[BEGIN] != HALT:
     op_value = OPCODE[inp[BEGIN]](inp[inp[BEGIN + 1]], inp[inp[BEGIN + 2]])
 
     inp[inp[BEGIN + 3]] = op_value
