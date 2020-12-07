@@ -18,8 +18,11 @@ class PasswordPolicy:
 
     # Forward references: https://www.python.org/dev/peps/pep-0484/#forward-references
     # More info: https://stackoverflow.com/a/33533514
+
+    # Using a class method to add an alternative constructor
+    # Source: https://twitter.com/pybites/status/1335702052928950273
     @classmethod
-    def get_policy(cls, policy: str) -> "PasswordPolicy":
+    def from_str(cls, policy: str) -> "PasswordPolicy":
         match = TEMPLATE.search(policy)
         if match:
             return cls(
@@ -44,7 +47,7 @@ if __name__ == "__main__":
     with open("input.txt", "r") as reader:
         inp = reader.read().splitlines()
 
-    policies = [PasswordPolicy.get_policy(policy) for policy in inp]
+    policies = [PasswordPolicy.from_str(policy) for policy in inp]
 
     n_valid_count_policies = sum(policy.is_valid_count() for policy in policies)
     n_valid_position_policies = sum(policy.is_valid_position() for policy in policies)
